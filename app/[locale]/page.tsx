@@ -1,9 +1,11 @@
+import EvolvingSection from "../components/landing/EvolvingSection";
 import HeroSection from "../components/landing/HeroSection";
 
 export default function Home({ params }: { params: Promise<{ locale: string }> }) {
   return (
     <>
       <HeroSection params={params} />
+      <EvolvingSection />
       {Array(5)
         .fill(0)
         .map((_, i) => (
