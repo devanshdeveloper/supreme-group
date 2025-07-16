@@ -1,9 +1,9 @@
-import Navbar from "../components/layout/Navbar";
+import HeroSection from "../components/landing/HeroSection";
 
 export default function Home({ params }: { params: Promise<{ locale: string }> }) {
   return (
     <>
-      <Navbar params={params} />
+      <HeroSection params={params} />
       {Array(5)
         .fill(0)
         .map((_, i) => (

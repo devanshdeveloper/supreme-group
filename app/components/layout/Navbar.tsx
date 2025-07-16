@@ -6,13 +6,14 @@ import LinkedInIcon from "../../assets/icons/bxl-linkedin.svg";
 import TranslateIcon from "../../assets/icons/translate 1.svg";
 import { usePathname, useRouter, Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { useNavbarHide } from "@/app/hooks/useNavbarHide";
 
 const Navbar = ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = use(params);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isNavbarVisible = useNavbarHide();
 
   const t = useTranslations();
-
 
   // Close menu when screen size changes (e.g., from mobile to desktop)
   useEffect(() => {
@@ -29,7 +30,13 @@ const Navbar = ({ params }: { params: Promise<{ locale: string }> }) => {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+    <header
+      className={
+        `fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm ` +
+        `transform transition-transform duration-300 ` +
+        `${isNavbarVisible ? 'translate-y-0' : '-translate-y-full'}`
+      }
+    >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-8">
         <Link href="/" onClick={closeMenu}>
           <Image
@@ -51,7 +58,7 @@ const Navbar = ({ params }: { params: Promise<{ locale: string }> }) => {
             icon={LinkedInIcon}
             alt="LinkedIn"
           />
-          <LanguageSelector  locale={locale}/>
+          <LanguageSelector locale={locale} />
         </nav>
 
         {/* Mobile Menu Button */}
@@ -66,7 +73,7 @@ const Navbar = ({ params }: { params: Promise<{ locale: string }> }) => {
 
       {/* Mobile Navigation */}
       {menuOpen && (
-        <nav  className="md:hidden absolute top-20 left-0 w-full bg-white shadow-md py-6 px-4 flex flex-col gap-4">
+        <nav className="md:hidden absolute top-20 left-0 w-full bg-white shadow-md py-6 px-4 flex flex-col gap-4">
           <NavLink href="/contact" isButton onClick={closeMenu}>
             {t("Contact Us")}
           </NavLink>
@@ -138,22 +145,24 @@ const SocialLink = ({
   </a>
 );
 
-const LanguageSelector = ({locale}: {locale: string}) => {
-  // When the user is on `/en`, this will be `/`
+const LanguageSelector = ({ locale }: { locale: string }) => {
   const pathname = usePathname();
   const router = useRouter();
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedLanguage = event.target.value;
-    console.log({ pathname, selectedLanguage });
-    router.replace("/", { locale: selectedLanguage });
+    router.replace(pathname, { locale: selectedLanguage });
   };
 
   return (
     <div className="flex items-center gap-3">
       <Image src={TranslateIcon} alt="Language" width={25} height={25} />
-      <select value={locale} className="text-black" onChange={handleLanguageChange}>
+      <select
+        value={locale}
+        className="text-black bg-transparent"
+        onChange={handleLanguageChange}
+      >
         <option value="en">English</option>
         <option value="es">Español</option>
       </select>
