@@ -14,7 +14,7 @@ View the live deployment: [https://supreme-group.vercel.app](https://supreme-gro
 Clone or explore the source code on GitHub:
 
 ```bash
-git clone https://github.com/yourusername/supreme-group.git
+git clone https://github.com/devanshdeveloper/supreme-group.git
 cd supreme-group
 ````
 

@@ -39,7 +39,7 @@ export const useVideoPlayer = (initialPlaying = true) => {
 
     // Try to play — play() returns a promise
     try {
-      var isPlaying =
+      const isPlaying =
         v.currentTime > 0 &&
         !v.paused &&
         !v.ended &&

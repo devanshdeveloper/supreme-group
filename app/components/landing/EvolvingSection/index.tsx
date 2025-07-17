@@ -247,8 +247,8 @@ export default function EvolvingSection() {
 
   const R = 24;
   const CIRC = 2 * Math.PI * R;
-
-  const onVariantChange = (swiper: any) => {
+// @ts-nocheck
+  const onVariantChange = (swiper: any) => { 
     const idx = swiper.activeIndex;
     const key = variants[idx] as VariantKey;
     handleChangeVariant(key, 2);

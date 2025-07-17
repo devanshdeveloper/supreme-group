@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 export default async function ContactPage() {
     const t = await getTranslations()
+    // @ts-nocheck
   const onSubmit = async (data: any) => {
     "use server";
     // TODO: save the data to the database

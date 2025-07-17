@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Navbar from "../layout/Navbar";
 
 export default function HeroSection() {
   const t = useTranslations();
