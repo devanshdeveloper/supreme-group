@@ -165,7 +165,7 @@ const LanguageSelector = ({ locale }: { locale: string }) => {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedLanguage = event.target.value;
-    router.replace(pathname, { locale: selectedLanguage });
+    window.location.href = `${window.location.origin}/${selectedLanguage}${pathname}`;
   };
 
   return (
