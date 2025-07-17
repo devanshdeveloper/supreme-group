@@ -8,6 +8,19 @@ import { usePathname, useRouter, Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useNavbarHide } from "@/app/hooks/useNavbarHide";
 
+const localeOptions = [
+  { code: "en", name: "English" },
+  { code: "es", name: "Español" },
+  { code: "zh", name: "中文" },
+  { code: "hi", name: "हिन्दी" },
+  { code: "ar", name: "العربية" },
+  { code: "bn", name: "বাংলা" },
+  { code: "pt", name: "Português" },
+  { code: "ru", name: "Русский" },
+  { code: "ja", name: "日本語" },
+  { code: "fr", name: "Français" },
+];
+
 const Navbar = ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = use(params);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,7 +47,7 @@ const Navbar = ({ params }: { params: Promise<{ locale: string }> }) => {
       className={
         `fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm ` +
         `transform transition-transform duration-300 ` +
-        `${isNavbarVisible ? 'translate-y-0' : '-translate-y-full'}`
+        `${isNavbarVisible ? "translate-y-0" : "-translate-y-full"}`
       }
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-8">
@@ -163,8 +176,11 @@ const LanguageSelector = ({ locale }: { locale: string }) => {
         className="text-black bg-transparent"
         onChange={handleLanguageChange}
       >
-        <option value="en">English</option>
-        <option value="es">Español</option>
+        {localeOptions.map(({ code, name }) => (
+          <option key={code} value={code}>
+            {name}
+          </option>
+        ))}
       </select>
     </div>
   );

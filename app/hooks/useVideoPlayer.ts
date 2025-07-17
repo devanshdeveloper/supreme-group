@@ -29,14 +29,30 @@ export const useVideoPlayer = (initialPlaying = true) => {
     videoRef.current = node;
   }, []);
 
-  const restartAndPlay = () => {
+  const restartAndPlay = async () => {
     const v = videoRef.current;
     if (!v) return;
+
+    // Pause and reset to start
     v.pause();
     v.currentTime = 0;
-    v.play();
-    setPlaying(true);
-    setProgress(0);
+
+    // Try to play — play() returns a promise
+    try {
+      var isPlaying =
+        v.currentTime > 0 &&
+        !v.paused &&
+        !v.ended &&
+        v.readyState > v.HAVE_CURRENT_DATA;
+
+      if (!isPlaying) {
+        await v.play();
+      }
+      setPlaying(true);
+      setProgress(0);
+    } catch (err) {
+      console.error("Failed to play video:", err);
+    }
   };
 
   const togglePlay = () => {

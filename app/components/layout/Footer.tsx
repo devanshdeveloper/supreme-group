@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,13 +18,16 @@ const footerData = [
   { title: "FOLLOW US", items: ["Twitter", "LinkedIn", "Instagram", "Medium"] },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getTranslations();
+
+
   return (
     <footer className="relative isolate overflow-hidden bg-gradient-to-b from-white to-[#f5f7fb] py-32">
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 md:gap-16">
         <Link href="/">
           <Image
-            src="/logo.svg"
+            src="/supreme-logo.svg"
             alt="Supreme Group Logo"
             width={226}
             height={64}
@@ -42,14 +46,14 @@ export default function Footer() {
                     : "flex-1 min-w-[150px]" // wide, grows with space
                 }
               >
-                <li className="mb-4 font-semibold text-black">{col.title}</li>
+                <li className="mb-4 font-semibold text-black">{t(col.title)}</li>
                 {col.items.map((item) => (
                   <li key={item} className="mb-3">
                     <Link
                       href="#"
                       className="text-[14px] text-[#000000B2] transition-colors hover:text-[#0067B1]"
                     >
-                      {item}
+                      {t(item)}
                     </Link>
                   </li>
                 ))}

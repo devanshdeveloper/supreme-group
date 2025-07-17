@@ -1,12 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Navbar from "../layout/Navbar";
 
-export default function HeroSection({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default function HeroSection() {
+  const t = useTranslations();
+    
   return (
     <section className="relative min-h-screen text-white overflow-hidden">
       <video
@@ -26,15 +25,16 @@ export default function HeroSection({
 
       <div className="relative z-10 flex flex-col items-center justify-center h-[calc(100vh-0rem)] px-4 sm:px-6 lg:px-8 text-center">
         <p className="text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4">
-          Performance in motion
+          {t("Performance in motion")}
         </p>
 
         <h1 className="font-semibold">
           <span className="block text-3xl sm:text-5xl md:text-[48px] lg:text-[48px]">
-            Soft Trims and NVH Solutions
+          {t("Soft Trims and NVH Solutions")}
+            
           </span>
           <span className="block font-extralight text-3xl sm:text-5xl md:text-48px lg:text-[48px]">
-            for seamless rides
+            {t("for seamless rides")}
           </span>
         </h1>
       </div>
